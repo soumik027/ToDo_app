@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 
 <html lang="en">
@@ -6,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TODO LIST - Home</title>
 
-```
+
 <!-- Bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -18,7 +19,7 @@
         padding: 1.375rem .75rem !important;
     }
 </style>
-```
+
 
 </head>
 
@@ -26,7 +27,7 @@
     <div class="container">
         <h3 class="pt-5 text-center">ToDo App</h3>
 
-```
+
     <div class="row">
         <h4>My Day</h4>
         <p class="text-muted" >{% now "j F Y"%}</p>
@@ -34,10 +35,11 @@
         <!-- Active Tasks -->
         <div class="col-md-7 col-lg-7" style="height: 450px; overflow: scroll;">
             
-            <!-- Sample Task -->
+            <!-- list of all Task -->
+             {% for task in tasks %}
             <div class="card m-1">
                 <div class="card-body">
-                    Sample Task 1
+                    {{task.task}}
                     <span style="float: right;">
                         <button class="btn btn-success"><i class="fa fa-check"></i> Done</button>
                         <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
@@ -45,17 +47,9 @@
                     </span>
                 </div>
             </div>
+            {% endfor %}
 
-            <div class="card m-1">
-                <div class="card-body">
-                    Sample Task 2
-                    <span style="float: right;">
-                        <button class="btn btn-success"><i class="fa fa-check"></i> Done</button>
-                        <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                        <button class="btn btn-primary"><i class="fa fa-pencil"></i></button>
-                    </span>
-                </div>
-            </div>
+            
 
         </div>
 
@@ -79,10 +73,12 @@
     <div class="row">
         <div class="col-md-6 col-lg-6 p-0" style="position: absolute; bottom: 50px;">
             
-            <form>
+            <form action="{% url 'addTask' %}" method="POST">
+                {% csrf_token %}
                 <div class="form-group">
                     <span style="display: flex;">
-                        <input type="text" class="form-control" placeholder="Add a task">
+                        <input type="text" 
+                        name="task" class="form-control" placeholder="Add a task">
                         <button type="submit" class="btn btn-primary" style="width: 200px;">
                             <i class="fa fa-plus"></i> Add
                         </button>
@@ -93,7 +89,7 @@
         </div>
     </div>
 </div>
-```
+
 
 </body>
 </html>
