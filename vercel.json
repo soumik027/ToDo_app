@@ -16,5 +16,8 @@
       "src": "/(.*)",
       "dest": "todo_main/wsgi.py"
     }
-  ]
+  ],
+  "scripts": {
+    "vercel-build": "bash build.sh"
+  }
 }
